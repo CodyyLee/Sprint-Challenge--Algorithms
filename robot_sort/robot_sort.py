@@ -76,9 +76,6 @@ class SortingRobot:
         else:
             return 0
 
-    def pick_up(self):
-        self._item = self._list[self._position]
-
     def set_light_on(self):
         """
         Turn on the robot's light
@@ -100,38 +97,33 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        
-        while self.can_move_right():
-            if self.light_is_on():
-                self.move_right()
-                self.swap_item()
-                self.move_right()
-            else:
-                self.swap_item()
-                self.move_right()
-                
-                if self.light_is_on():
-                    self.set_light_off()
+        while True: #constantly loop until it is explicitly told to knock it's crap off
+            self.set_light_off() #make sure light is off because we need to use it in order to terminate the loop
 
-            if self.compare_item() == 1:
-                self.swap_item()
-                self.move_left()
-                self.swap_item()
-                self.move_right()
-                
-                if self.light_is_on():
-                    self.set_light_off()
-            else:
-                self.move_left()
-                self.swap_item()
-                self.set_light_on()
+            while self.can_move_right(): #from left to right compare item with next in list if there is one
+                self.swap_item()    #pick up an item
+                self.move_right()   #change the position to give it something to compare it to
 
-            while self.can_move_left():
-                self.move_left()
+                if self.compare_item() == 1: #compare item and next item in list
+                    self.swap_item()    #swap them if that item is larger than the next
 
-            if 
+                self.move_left()    #move back to NONE
+                self.swap_item()    #put that item there
+                self.move_right()   #continue forward and restart loop if able
 
+            while self.can_move_left(): #this is basically the same thing as above, but backwards
+                self.swap_item()    #grab item
+                self.move_left()    #move over
 
+                if self.compare_item() == -1: #since it is backwards we want to know if it is less than the prev value
+                    self.swap_item()    #if it is, swap them to put then in order so [5, 3] becomes [3, 5]
+                    self.set_light_on() #turn that light on please, it's scary here
+
+                self.move_right()   #move to NONE
+                self.swap_item()    #put that item there
+                self.move_left()    #continue backwards and repeat if we aren't back to the beginning of the list
+            if self.light_is_on() is False: #if the light is still off, then we know the list is sorted because we turned it on if the backwards detected something out of place. 
+                break #for the love of all that is holy, please get me out of this loop of loops
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
