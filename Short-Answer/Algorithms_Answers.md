@@ -2,13 +2,15 @@
 
 ## Exercise I
 
-a) Cubic
+a) O(n)
 
+The while loop is directly impacted by the length of the input 'n' so it is O(n). in the loop is O(1), so it's O(n + 1). Simplified it becomes O(n).
 
-b) Quadratic
+b) O(nlog(n))
 
+The for loop is directly impacted by the length of the input 'n' so it is O(n). The while loop is spliting by multiplying J by 2 so it uses the 'divide and conquor' kind of algorithm making it O(log(n)). So bringing them both together would make the entire function O(nlog(n)).
 
-c) Exponential
+c) O(n^2)
 
 ## Exercise II
 

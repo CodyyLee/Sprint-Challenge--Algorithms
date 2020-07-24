@@ -8,18 +8,18 @@ pseudocode with respect to the input size n of each of the following:
 ```python
 a)  a = 0
     while (a < n * n * n):
-      a = a + n * n o 
+      a = a + n * n
 ```
-
 
 ```
 b)  sum = 0
     for i in range(n):
-      j = 1 #O(1)
-      while j < n:
+      j = 1 
+      while j < n: 
         j *= 2 
         sum += 1
 ```
+The for loop is directly impacted by the length of the input 'n' so it is O(n). The while loop is spliting by multiplying J by 2 so it uses the 'divide and conquor' kind of algorithm making it O(log(n)). So bringing them both together would make the entire function O(nlog(n)).
 
 ```
 c)  def bunnyEars(bunnies):
